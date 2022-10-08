@@ -107,5 +107,6 @@ func (s *Service) processQueue(el *list.Element) {
 	log.Info("background resizes done")
 	s.imageStatusMU.Lock()
 	defer s.imageStatusMU.Unlock()
+	close(s.imageStatus[t.imageID].signal)
 	s.imageStatus[t.imageID].status = res.Result
 }
